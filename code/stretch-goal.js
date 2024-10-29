@@ -13,17 +13,17 @@ const course = {
 };
 const numbers = [0, 15, -3, 9, null, 22, undefined, 8, NaN, false, 100];
 
-// Task 1: Object Manipulation
-// Use the spread operator to create a new object called `updatedStudent`, updating the age to 21
-// and adding a new property `major` with the value "Computer Science".
-// Log `updatedStudent` to the console.
+// // Task 1: Object Manipulation
+// // Use the spread operator to create a new object called `updatedStudent`, updating the age to 21
+// // and adding a new property `major` with the value "Computer Science".
+// // Log `updatedStudent` to the console.
 const updatedStudent = { ...student, age: 21, major: "Computer Science" };
 console.log(updatedStudent);
 
-// Task 2: Nested Destructuring
-// Use nested destructuring to extract the firstName and lastName of the instructor from the `course` object
-// into variables `instructorFirstName` and `instructorLastName`.
-// Log `instructorFirstName` and `instructorLastName` to the console.
+// // Task 2: Nested Destructuring
+// // Use nested destructuring to extract the firstName and lastName of the instructor from the `course` object
+// // into variables `instructorFirstName` and `instructorLastName`.
+// // Log `instructorFirstName` and `instructorLastName` to the console.
 const {
   instructor: { firstName: instructorFirstName, lastName: instructorLastName },
 } = course;
@@ -35,9 +35,14 @@ console.log(`${instructorFirstName} ${instructorLastName}`);
 // from the `numbers` array.
 // Call `filterValidNumbers` with `numbers` and log the result to the console.
 const filterValidNumbers = (arr) => {
-  return arr.filter((num) => Boolean(num) && num >= 0);
-};
+  return arr.filter((num) => ((num) && num >= 0))
+}
 console.log(filterValidNumbers(numbers));
+// or with Boolean(num): 
+// const filterValidNumbers = (arr) => {
+//   return arr.filter((num) => Boolean(num) && num >= 0);
+// };
+
 
 // Task 4: Loop with Conditionals
 // Write a function called `analyzeStudentGrades` that takes an object representing a student
@@ -47,13 +52,13 @@ console.log(filterValidNumbers(numbers));
 // If it's below 70, print "[Student Name], you need to improve.".
 // Call `analyzeStudentGrades` with the `updatedStudent` object.
 
-// Task 4: Loop with Conditionals
-// Write a function called `analyzeStudentGrades` that takes an object representing a student
-// (with properties `name` and `grades` - an array of numbers) and calculates the average grade.
-
 const analyzeStudentGrades = (student) => {
-  const total = student.grades.reduce((sum, grade) => sum + grade, 0);
-  const average = total / student.grades.length;
+  const grades = student.grades;
+  let total = 0;
+  for (let i = 0; i < grades.length; i++) {
+    total += grades[i];
+  }
+  let average = Math.round(total / grades.length);
 
   if (average > 85) {
     console.log(`Excellent performance, ${student.name}!`);
@@ -65,3 +70,7 @@ const analyzeStudentGrades = (student) => {
 };
 
 analyzeStudentGrades(updatedStudent);
+
+// With reduce:
+// const total = student.grades.reduce((sum, item) => sum + item, 0);
+
